@@ -1,3 +1,4 @@
+import package models;
 package tui;
 
 import java.util.Scanner;
