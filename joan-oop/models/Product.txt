@@ -1,0 +1,41 @@
+public class Product {
+
+    protected int productID;
+    protected String productName;
+    protected double price;
+    protected int stock;
+
+    public Product(int productID, String productName, double price, int stock) {
+        this.productID = productID;
+        this.productName = productName;
+        this.price = price;
+        this.stock = stock;
+    }
+
+    public void displayProduct() {
+        System.out.println("ID: " + productID);
+        System.out.println("Product: " + productName);
+        System.out.println("Price: $" + price);
+        System.out.println("Stock: " + stock);
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void reduceStock() {
+        stock--;
+    }
+
+    public void increaseStock() {
+        stock++;
+    }
+}

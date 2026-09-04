@@ -1,0 +1,32 @@
+public class Customer {
+
+    private String username;
+    private String password;
+    private boolean loggedIn;
+
+    public Customer(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public boolean login(String username, String password) {
+
+        if(this.username.equals(username) && this.password.equals(password)) {
+            loggedIn = true;
+            System.out.println("Login successful.");
+            return true;
+        }
+
+        System.out.println("Login failed.");
+        return false;
+    }
+
+    public void logout() {
+        loggedIn = false;
+        System.out.println("Customer logged out.");
+    }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+}
