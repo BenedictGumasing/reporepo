@@ -1,3 +1,5 @@
+package models;
+
 public class PrintedBook extends Product {
 
     private int pages;
