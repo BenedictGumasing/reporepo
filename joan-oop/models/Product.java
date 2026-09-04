@@ -1,3 +1,5 @@
+package models;
+
 public class Product {
 
     protected int productID;
