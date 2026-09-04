@@ -1,3 +1,5 @@
+package models;
+
 public class Magazine extends Product {
 
     private String category;
