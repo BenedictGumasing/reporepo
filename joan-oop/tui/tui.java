@@ -9,7 +9,7 @@ public class TUI {
 
     Customer customer = new Customer("emma", "books123");
     Cart cart = new Cart();
-    BookstoreService bookstoreService = new BookstoreService(cart, new PaymentProcessor());
+    Checkout checkout = new Checkout(cart, new PaymentProcessor());
     ItemInfoPrinter itemInfoPrinter = new ItemInfoPrinter();
 
     Product[] products = {
@@ -94,7 +94,7 @@ public class TUI {
                     break;
 
                 case 6:
-                    checkout();
+                    processCheckout();
                     break;
 
                 case 7:
@@ -167,7 +167,7 @@ public class TUI {
         }
     }
 
-    private void checkout() {
+    private void processCheckout() {
 
         System.out.println("Payment Method:");
         System.out.println("1. Cash");
@@ -199,6 +199,6 @@ public class TUI {
                 return;
         }
 
-        bookstoreService.checkout(paymentMethod);
+        checkout.checkout(paymentMethod);
     }
 }
