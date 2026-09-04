@@ -17,7 +17,7 @@ public class Product {
     public void displayProduct() {
         System.out.println("ID: " + productID);
         System.out.println("Product: " + productName);
-        System.out.println("Price: $" + price);
+        System.out.println("Price: ₱" + price);
         System.out.println("Stock: " + stock);
     }
 

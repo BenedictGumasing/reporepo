@@ -9,12 +9,13 @@ public class TUI {
 
     Customer customer = new Customer("emma", "books123");
     Cart cart = new Cart();
-    Payment payment = new Payment();
+    BookstoreService bookstoreService = new BookstoreService(cart, new PaymentProcessor());
+    ItemInfoPrinter itemInfoPrinter = new ItemInfoPrinter();
 
     Product[] products = {
-        new Book(101,"The Secret Garden","Frances Hodgson Burnett",18.50,5),
-        new PrintedBook(102,"Cooking Around The World",250,25.00,3),
-        new Magazine(103,"Travel Explorer","Adventure",8.99,10)
+        new Book(101,"The Secret Garden","Frances Hodgson Burnett",550.00,5),
+        new PrintedBook(102,"Cooking Around The World",250,1250.00,3),
+        new Magazine(103,"Travel Explorer","Adventure",450.00,10)
     };
 
     public void start() {
@@ -63,8 +64,9 @@ public class TUI {
             System.out.println("2. Add Product To Cart");
             System.out.println("3. View Cart");
             System.out.println("4. Remove Product From Cart");
-            System.out.println("5. Checkout");
-            System.out.println("6. Logout");
+            System.out.println("5. View Item Details");
+            System.out.println("6. Checkout");
+            System.out.println("7. Logout");
             System.out.print("Choice: ");
 
             int choice = scanner.nextInt();
@@ -88,10 +90,14 @@ public class TUI {
                     break;
 
                 case 5:
-                    checkout();
+                    viewItemDetails();
                     break;
 
                 case 6:
+                    checkout();
+                    break;
+
+                case 7:
                     customer.logout();
                     break;
 
@@ -143,18 +149,25 @@ public class TUI {
         cart.removeProduct(cartNumber - 1);
     }
 
-    private void checkout() {
+    private void viewItemDetails() {
 
-        if(cart.empty()) {
-
-            System.out.println("Cart is empty.");
-            return;
-
+        System.out.println("\n===== SELECT ITEM =====");
+        
+        for(int i = 0; i < products.length; i++) {
+            System.out.println((i + 1) + ". " + products[i].getProductName());
         }
+        
+        System.out.print("Enter item number: ");
+        int itemNumber = scanner.nextInt();
+        
+        if(itemNumber > 0 && itemNumber <= products.length) {
+            itemInfoPrinter.printItemInfo(products[itemNumber - 1]);
+        } else {
+            System.out.println("Invalid item number.");
+        }
+    }
 
-        double totalAmount = cart.getTotal();
-
-        System.out.println("Total Amount: $" + totalAmount);
+    private void checkout() {
 
         System.out.println("Payment Method:");
         System.out.println("1. Cash");
@@ -165,20 +178,27 @@ public class TUI {
 
         int paymentChoice = scanner.nextInt();
 
-        String paymentMethod;
+        PaymentMethod paymentMethod;
 
-        if(paymentChoice == 1) {
-            paymentMethod = "Cash";
-        }
-        else if(paymentChoice == 2) {
-            paymentMethod = "Credit Card";
-        }
-        else {
-            paymentMethod = "GCash";
+        switch(paymentChoice) {
+
+            case 1:
+                paymentMethod = new CashPayment();
+                break;
+
+            case 2:
+                paymentMethod = new CreditCardPayment();
+                break;
+
+            case 3:
+                paymentMethod = new GCashPayment();
+                break;
+
+            default:
+                System.out.println("Invalid payment method.");
+                return;
         }
 
-        payment.pay(totalAmount,paymentMethod);
-
-        cart.clear();
+        bookstoreService.checkout(paymentMethod);
     }
 }

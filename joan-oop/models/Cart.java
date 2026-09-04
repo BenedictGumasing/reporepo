@@ -48,11 +48,11 @@ public class Cart {
 
             System.out.println((i + 1) + ". " 
             + products.get(i).getProductName()
-            + " $" + products.get(i).getPrice());
+            + " ₱" + products.get(i).getPrice());
 
         }
 
-        System.out.println("Total: $" + getTotal());
+        System.out.println("Total: ₱" + getTotal());
     }
 
     public double getTotal() {
@@ -68,5 +68,9 @@ public class Cart {
 
     public boolean empty() {
         return products.isEmpty();
+    }
+
+    public void clear() {
+        products.clear();
     }
 }
