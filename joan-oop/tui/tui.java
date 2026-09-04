@@ -1,6 +1,6 @@
-import package models;
 package tui;
 
+import models.*;
 import java.util.Scanner;
 
 public class TUI {
