@@ -1,0 +1,28 @@
+Single Responsibility Principle (SRP)
+
+Merchandise handles the common product data and behavior.
+Book, EBook, and Magazine each handle their own type-specific details.
+ShoppingBasket is responsible only for basket operations.
+PaymentProcessor is responsible for payment/receipt logic.
+InfoPrinter is responsible for display output.
+This separation is a strong SRP pattern.
+Interface Segregation Principle (ISP)
+
+You created small, focused interfaces instead of one large interface:
+Displayable
+Stockable
+Payable
+Each class implements only what it actually needs.
+Liskov Substitution Principle (LSP)
+
+Book, EBook, and Magazine all extend Merchandise and can be used anywhere a Merchandise is expected.
+They all override getDisplayInfo() consistently, so polymorphism works as intended.
+Open/Closed Principle (OCP)
+
+Merchandise is abstract, and new product types can be added by extending it.
+This means you can add more item types without rewriting the base logic.
+However, InfoPrinter.printMerchandise() still uses instanceof, so this is only partially OCP-friendly.
+Dependency Inversion Principle (DIP)
+
+High-level logic depends on abstractions like Merchandise, Displayable, etc., rather than concrete classes.l
+Example: basket and printer logic work with product abstractions, not hardcoded implementations.
